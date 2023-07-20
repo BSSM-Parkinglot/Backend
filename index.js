@@ -3,7 +3,7 @@ const path = require("path");
 const morgan = require("morgan");
 const nunjucks = require("nunjucks");
 
-const { sequelize } = require("./models"); // db.sequelize
+const { sequelize } = require("./models");
 
 const app = express();
 app.set("port", process.env.PORT || 3000);
@@ -13,7 +13,7 @@ nunjucks.configure("views", {
   watch: true,
 });
 sequelize
-  .sync({ force: false })
+  .sync({ force: true })
   .then(() => {
     console.log("데이터베이스 연결됨.");
   })
