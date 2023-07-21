@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      window.onload = function () {
+        setTimeout(function () {
+          location.reload();
+        }, 1000);
+      };
+    </script>
+
+    <table>
+      <thead>
+        <tr>
+          <th>이름</th>
+          <th>비밀번호</th>
+          <th>차번호</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for users in user %}
+        <tr>
+          <td>{{users.UserName}}</td>
+          <td>{{users.Password}}</td>
+          <td>{{users.CarNum}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </body>
+</html>
