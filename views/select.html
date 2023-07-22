@@ -9,7 +9,9 @@
     <form id="car-form">
       <fieldset>
         <legend>자동차 조회</legend>
-        <div><input id="carnum" type="text" placeholder="차 번호" /></div>
+        <div>
+          <input id="carnum" type="text" placeholder="차 번호" required />
+        </div>
         <button type="submit" onclick="location.href='car'">조회</button>
       </fieldset>
     </form>
@@ -34,6 +36,8 @@
         <button type="submit" onclick="location.href='signup'">회원가입</button>
       </fieldset>
     </form>
+
+    <a href="/login">로그인 페이지 이동</a>
 
     <table>
       <thead>
