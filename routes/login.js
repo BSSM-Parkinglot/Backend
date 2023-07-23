@@ -17,6 +17,9 @@ router.post("/", async (req, res, next) => {
 
   if (user.length > 0) {
     console.log("로그인 성공");
+    req.session.user = {
+        username: user[0].UserName,
+    };
     res.send("success");
   } else {
     console.log("로그인 실패");
