@@ -16,12 +16,19 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
   const password = e.target.password.value;
   const carnum = e.target.carnum.value;
   try {
-    const response = await axios.post("/signup", { username, password, carnum });
+    const response = await axios.post("/signup", {
+      username,
+      password,
+      carnum,
+    });
     const data = response.data;
     if (data === "fail") {
-        alert("이미 등록된 차량번호입니다.");
-        location.href = "/";
-      }
+      alert("이미 등록된 차량번호입니다.");
+      location.href = "/";
+    }
+    else if (data === "success") {
+      location.href = "/signup";
+    }
   } catch (err) {
     console.error(err);
   }

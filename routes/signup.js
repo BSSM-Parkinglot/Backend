@@ -29,6 +29,7 @@ router.post("/", async (req, res, next) => {
       Password: req.body.password,
       CarNum: req.body.carnum,
     });
+    res.send("success");
   }
 });
 
