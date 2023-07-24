@@ -3,6 +3,7 @@ const session = require("express-session");
 const path = require("path");
 const morgan = require("morgan");
 const nunjucks = require("nunjucks");
+require("dotenv").config();
 
 const { sequelize } = require("./models");
 const indexRouter = require("./routes/index");
@@ -20,7 +21,7 @@ nunjucks.configure("views", {
   watch: true,
 });
 sequelize
-  .sync({ force: true })
+  .sync({ force: false })
   .then(() => {
     console.log("데이터베이스 연결됨.");
   })
@@ -34,7 +35,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(
   session({
-    secret: "code",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false,
   })
