@@ -4,10 +4,8 @@ const User = require("../models/user");
 const router = express.Router();
 
 router.get("/", async (req, res, next) => {
-  const user = await User.findAll();
-  console.log(user);
   try {
-    res.render("user", { user });
+    res.render("signup");
   } catch (err) {
     console.error(err);
     next(err);
@@ -15,14 +13,20 @@ router.get("/", async (req, res, next) => {
 });
 
 router.post("/", async (req, res, next) => {
-  const user = await User.findAll({
+  const dup_carnum = await User.findAll({
     where: {
       CarNum: req.body.carnum,
     },
   });
-
-  if (user.length > 0) {
-    res.send("fail");
+  const dup_user = await User.findAll({
+    where: {
+      UserName: req.body.username,
+    },
+  });
+  if (dup_carnum.length > 0) {
+    res.send("carnum_fail");
+  } else if (dup_user.length > 0) {
+    res.send("user_fail");
   } else {
     await User.create({
       UserName: req.body.username,
@@ -32,5 +36,10 @@ router.post("/", async (req, res, next) => {
     res.send("success");
   }
 });
+
+router.get('/info', async (req, res, next) => {
+  const user = await User.findAll();
+  res.render('user', { user });
+})
 
 module.exports = router;
