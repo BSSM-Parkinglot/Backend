@@ -61,7 +61,7 @@
         border: 0;
         padding: 10px 10px;
         margin: 15px -10px;
-        outline: 0.5px solid black;
+        outline: .5px solid black;
       }
 
       .login > button {
@@ -95,13 +95,40 @@
     </style>
   </head>
   <body>
-    <form id="account-form" class="login">
-      <h3>계좌 등록</h3>
+    <form id="car-form" class="login">
+      <h3>차 번호 조회</h3>
       <input id="carnum" type="text" placeholder="차 번호" required />
-      <input id="account" type="text" placeholder="계좌 번호" required />
-      <button type="submit">등록</button>
+      <button type="submit">조회</button>
     </form>
+
+    <a href="/signup">회원가입 페이지 이동</a>
+
+    <a href="/login">로그인 페이지 이동</a>
+
+    <a href="/account">계좌번호 등록 페이지 이동</a>
+
+    <table>
+      <thead>
+        <tr>
+          <th>차번호</th>
+          <th>시간</th>
+          <th>돈</th>
+          <th>장소</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for car in cars %}
+        <tr>
+          <td>{{car.CarNum}}</td>
+          <td>{{car.Time}}</td>
+          <td>{{car.Money}}</td>
+          <td>{{car.Spot}}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+    Hello {{user.username}}! Id {{user.id}}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/account.js"></script>
+    <script src="/index.js"></script>
   </body>
 </html>

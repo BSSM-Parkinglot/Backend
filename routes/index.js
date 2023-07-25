@@ -7,7 +7,7 @@ router.get("/", async (req, res, next) => {
   const cars = await Car_Info.findAll();
   const user = req.session.user;
   try {
-    res.render("select", { cars, user });
+    res.render("index", { cars, user });
   } catch (err) {
     console.error(err);
     next(err);
