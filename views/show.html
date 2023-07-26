@@ -10,6 +10,9 @@
       font-family: "Asap", sans-serif;
       background-color: rgb(254, 251, 240);
     }
+    * {
+      border: 1px solid black;
+    }
   </style>
   <body>
     <script>
@@ -24,7 +27,9 @@
       <thead>
         <tr>
           <th>차번호</th>
-          <th>시간</th>
+          <th>들어온 시간</th>
+          <th>나간 시간</th>
+          <th>머문 시간</th>
           <th>돈</th>
           <th>장소</th>
         </tr>
@@ -33,6 +38,8 @@
         {% for car in cars %}
         <tr>
           <td>{{car.CarNum}}</td>
+          <td>{{car.EnterTime}}</td>
+          <td>{{car.ExitTime}}</td>
           <td>{{car.Time}}</td>
           <td>{{car.Money}}</td>
           <td>{{car.Spot}}</td>
