@@ -7,6 +7,7 @@ var cars;
 var val;
 var exit;
 var timeDifferenceInMinutes;
+var money;
 
 router.get("/", async (req, res, next) => {
   res.render("show", { cars });
@@ -38,11 +39,14 @@ router.post("/", async (req, res, next) => {
 
       timeDifferenceInMinutes = timeDifferenceInMillis / (1000 * 60);
 
+      money = timeDifferenceInMinutes / 10 * 1000;
+
       console.log("Time Difference (in minutes):", timeDifferenceInMinutes);
 
       await Car_Info.update(
         {
           Time: timeDifferenceInMinutes,
+          Money: money,
         },
         {
           where: {
@@ -75,12 +79,15 @@ router.post("/", async (req, res, next) => {
 
       timeDifferenceInMinutes = timeDifferenceInMillis / (1000 * 60);
 
+      money = timeDifferenceInMinutes / 10 * 1000;
+
       console.log("Time Difference (in minutes):", timeDifferenceInMinutes);
 
       await Car_Info.update(
         {
           Time: timeDifferenceInMinutes,
           ExitTime: null,
+          Money: money,
         },
         {
           where: {
