@@ -20,6 +20,7 @@ router.post("/", async (req, res, next) => {
     req.session.user = {
       id: user[0].id,
       username: user[0].UserName,
+      carnum: user[0].CarNum,
     };
     res.send("success");
   } else {

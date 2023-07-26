@@ -17,7 +17,7 @@ document.getElementById("signup-form").addEventListener("submit", async (e) => {
         alert("이미 등록된 이름입니다.");
       }
       else if (data === "success") {
-        location.href = "/signup/info";
+        location.href = "/login";
       }
     } catch (err) {
       console.error(err);
