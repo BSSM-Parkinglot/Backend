@@ -102,7 +102,7 @@
         padding: 40px 30px 30px 30px;
         border-radius: 10px;
         position: absolute;
-        top: 50%;
+        top: 70%;
         left: 50%;
         width: 400px;
         transform: translate(-50%, -50%);
@@ -178,11 +178,39 @@
           transform: rotate(360deg);
         }
       }
+      table {
+        display: flex;
+        justify-content: center;
+        margin: 30px 0px;
+      }
+      .parking {
+        padding: 10px;
+        border-radius: 8px;
+        text-align: center;
+        font-weight: bold;
+        font-size: 18px;
+        width: 200px;
+        height: 100px;
+      }
+
+      #false {
+        background-color: blue;
+        color: #fff;
+      }
+
+      #true {
+        background-color: red;
+        color: #fff;
+      }
+      h1 {
+        text-align: center;
+      }
     </style>
 
     <header class="header">
       <h1 class="logo"><a href="/">주차장 시스템</a></h1>
       <ul class="main-nav">
+        <li><a href="">{{user.username}}</a></li>
         <li><a href="/">차량 조회</a></li>
         <li><a href="/account">계좌 등록</a></li>
         <li><a href="/login">로그인</a></li>
@@ -193,31 +221,29 @@
   <body>
     <form id="car-form" class="login">
       <h3>차 번호 조회</h3>
-      <input id="carnum" type="text" placeholder="차 번호" value='{{user.carnum}}' required />
+      <input
+        id="carnum"
+        type="text"
+        placeholder="차 번호"
+        value="{{user.carnum}}"
+        required
+      />
       <button type="submit">조회</button>
     </form>
-
+    <h1>주차장 자리</h1>
     <table>
-      <thead>
-        <tr>
-          <th>차번호</th>
-          <th>시간</th>
-          <th>돈</th>
-          <th>장소</th>
-        </tr>
-      </thead>
+      
+      <thead></thead>
       <tbody>
-        {% for car in cars %}
+        {% for spot in spots %}
         <tr>
-          <td>{{car.CarNum}}</td>
-          <td>{{car.Time}}</td>
-          <td>{{car.Money}}</td>
-          <td>{{car.Spot}}</td>
+          <td>
+            <div class="parking" id="{{spot.Parking}}">{{spot.Spot}}</div>
+          </td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
-    Hello {{user.username}}! Id {{user.id}}
     <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
     <script src="/index.js"></script>
   </body>
