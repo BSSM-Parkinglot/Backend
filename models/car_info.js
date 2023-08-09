@@ -29,7 +29,6 @@ class Car_Info extends Sequelize.Model {
         timestamps: false,
         modelName: "Car_Info",
         tableName: "Car_Info",
-        timezone: '+09:00',
         charset: "utf8",
         collate: "utf8_general_ci",
       }
