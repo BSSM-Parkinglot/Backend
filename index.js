@@ -14,7 +14,7 @@ const sessionRouter = require("./routes/profile");
 const accountRouter = require("./routes/account");
 
 const app = express();
-app.set("port", process.env.PORT || 3000);
+app.set("port", process.env.PORT || 3306);
 app.set("view engine", "html");
 nunjucks.configure("views", {
   express: app,

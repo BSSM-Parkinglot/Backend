@@ -1,202 +1,283 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
-    <style>
-      * {
-        box-sizing: border-box;
-      }
-      body {
-        font-family: "Montserrat", sans-serif;
-        line-height: 1.6;
-        margin: 0;
-        min-height: 100vh;
-      }
-      ul {
-        margin: 0;
-        padding: 0;
-        list-style: none;
-      }
 
-      h2,
-      h3,
-      a {
-        color: #34495e;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Document</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Pretendard Variable", Pretendard, Roboto, "Noto Sans KR", "Segoe UI", "Malgun Gothic", "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", sans-serif;
+    }
 
-      a {
-        text-decoration: none;
-      }
+    body {
+      line-height: 1.6;
+      margin: 0;
+      min-height: 100vh;
+    }
 
-      .logo {
-        margin: 0px 100px;
-        font-size: 1.45em;
-      }
+    ul {
+      margin: 0;
+      padding: 0;
+      list-style: none;
+    }
 
-      .main-nav {
-        margin-top: 5px;
-        margin: 0px 100px;
-      }
-      .logo a,
-      .main-nav a {
-        padding: 10px 15px;
-        text-transform: uppercase;
-        text-align: center;
-        display: block;
-      }
+    a {
+      text-decoration: none;
+    }
 
-      .main-nav a {
-        color: #34495e;
-        font-size: 0.99em;
-      }
+    .main-nav {
+      display: flex;
+      flex-direction: row;
+      gap: 24px;
+    }
 
-      .main-nav a:hover {
-        color: #718daa;
-      }
+    .sub-nav {
+      display: flex;
+      flex-direction: row;
+      gap: 10px;
+    }
 
-      .header {
-        padding-top: 0.5em;
-        padding-bottom: 0.5em;
-        border: 1px solid #a2a2a2;
-        background-color: #fdfafd;
-        -webkit-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
-        -moz-box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
-        box-shadow: 0px 0px 14px 0px rgba(0, 0, 0, 0.75);
-        border-bottom-right-radius: 30px;
-        border-bottom-left-radius: 30px;
-      }
+    .main-nav .li {
+      display: flex;
 
-      @media (min-width: 769px) {
-        .header,
-        .main-nav {
-          display: flex;
-        }
-        .header {
-          flex-direction: column;
-          align-items: center;
-          .header {
-            width: 80%;
-            margin: 0 auto;
-            max-width: 1150px;
-          }
-        }
-      }
+    }
 
-      @media (min-width: 1025px) {
-        .header {
-          flex-direction: row;
-          justify-content: space-between;
-        }
-      }
-      body {
-        font-family: "Asap", sans-serif;
-        background-color: rgb(254, 251, 240);
-      }
+    .main-nav a {
+      color: #21242C;
+      font-size: 16px;
+      font-weight: 500;
 
-      .login {
-        overflow: hidden;
-        background-color: white;
-        padding: 40px 30px 30px 30px;
-        border-radius: 10px;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        width: 400px;
-        transform: translate(-50%, -50%);
-        transition: transform 300ms, box-shadow 300ms;
-        box-shadow: 5px 10px 10px rgba(2, 128, 144, 0.2);
-      }
+    }
 
-      .login::before,
-      .login::after {
-        content: "";
-        position: absolute;
-        width: 600px;
-        height: 600px;
-        border-top-left-radius: 40%;
-        border-top-right-radius: 45%;
-        border-bottom-left-radius: 35%;
-        border-bottom-right-radius: 40%;
-        z-index: -1;
-      }
+    .main-nav a:hover {
+      color: #70737C;
+    }
 
-      .login::before {
-        left: 40%;
-        bottom: -130%;
-        background-color: rgba(69, 105, 144, 0.15);
-        animation: wawes 6s infinite linear;
-      }
+    .header {
+      height: 64px;
+      background-color: #ffffff;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border-bottom: 1px solid #EEF0F2;
+    }
 
-      .login::after {
-        left: 35%;
-        bottom: -125%;
-        background-color: rgba(2, 128, 144, 0.2);
-        animation: wawes 7s infinite;
-      }
+    body {
+      background-color: #fff;
+    }
 
-      .login > input {
-        font-family: "Asap", sans-serif;
-        display: block;
-        border-radius: 5px;
-        font-size: 16px;
-        background: white;
-        width: 100%;
-        border: 0;
-        padding: 10px 10px;
-        margin: 15px -10px;
-        outline: 0.5px solid black;
-      }
+    .login {
+      display: flex;
+      flex-direction: column;
+      background-color: #FAFAFB;
+      padding: 36px 32px;
+      border-radius: 16px;
+      width: 378px;
+      margin: 0 auto;
+      margin-top: 120px;
+    }
 
-      .login > button {
-        font-family: "Asap", sans-serif;
-        cursor: pointer;
-        color: #fff;
-        font-size: 16px;
-        text-transform: uppercase;
-        width: 80px;
-        border: 0;
-        padding: 10px 0;
-        margin-top: 10px;
-        margin-left: -5px;
-        border-radius: 5px;
-        background-color: rgba(244, 91, 105, 1);
-        transition: background-color 300ms;
-      }
+    table {
+      display: flex;
+      justify-content: center;
+      margin: 30px 0px;
+    }
 
-      .login > button:hover {
-        background-color: rgba(244, 91, 105, 0.95);
-      }
+    .parking {
+      padding: 10px;
+      border-radius: 8px;
+      text-align: center;
+      font-weight: bold;
+      font-size: 18px;
+      width: 200px;
+      height: 100px;
+    }
 
-      @keyframes wawes {
-        from {
-          transform: rotate(0);
-        }
-        to {
-          transform: rotate(360deg);
-        }
-      }
-    </style>
-  </head>
-  <body>
-    <header class="header">
-      <h1 class="logo"><a href="/">주차장 시스템</a></h1>
-      <ul class="main-nav">
-        <li><a href="/">차량 조회</a></li>
-        <li><a href="/account">계좌 등록</a></li>
-        <li><a href="/login">로그인</a></li>
-        <li><a href="/signup">회원가입</a></li>
+    #false {
+      background-color: #235FF8;
+    }
+
+    #true {
+      background-color: #F44336;
+    }
+
+    .logo {
+      height: 28px;
+    }
+
+    .header .container {
+      width: 1194px;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .container div {
+      display: flex;
+      flex-direction: row;
+      gap: 56px;
+    }
+
+    .container div a {
+      display: flex;
+      align-items: center;
+    }
+
+    .signup-button {
+      display: flex;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      background-color: #EEF0F2;
+      color: #21242C;
+      border-radius: 6px;
+    }
+
+    .login-button {
+      display: flex;
+      height: 40px;
+      align-items: center;
+      justify-content: center;
+      padding: 0 16px;
+      background-color: #235FF8;
+      color: #ffffff;
+      border-radius: 6px;
+    }
+
+    .section {
+      display: flex;
+      margin: 0 auto;
+      width: 1194px;
+      margin-top: 140px;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+
+    .parking-place {
+      display: flex;
+      flex-direction: column;
+      gap: 48px;
+      width: 684px;
+    }
+
+    .parking-row {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      width: 684px;
+      align-items: center;
+    }
+
+    .parking-section {
+      display: flex;
+      flex-direction: row;
+      gap: 30px;
+    }
+
+    .empty-lot {
+      width: 72px;
+      height: 120px;
+      background-color: #235FF8;
+      color: #fff;
+      border-radius: 6px;
+      font-size: 28px;
+      text-align: center;
+      font-weight: 500;
+
+    }
+
+    .wall {
+      width: 50px;
+      height: 50px;
+      background-color: #70737C;
+      border-radius: 6px;
+    }
+
+    .form-title {
+      font-size: 24px;
+      line-height: 140%;
+      font-weight: 600;
+      letter-spacing: 0.15px;
+      color: #21242C;
+      margin: 0;
+    }
+
+    .form-input {
+      display: block;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 314px;
+      height: 48px;
+      margin: 0;
+      border: 0;
+      padding: 0 16px;
+      outline: 1px solid #BBBCC2;
+    }
+
+    .input-section {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .form-button {
+      cursor: pointer;
+      color: #fff;
+      font-size: 16px;
+      font-weight: 500;
+      line-height: 130%;
+      width: 314px;
+      height: 48px;
+      border: 0;
+      margin-top: 48px;
+      padding: 10px 0;
+      border-radius: 6px;
+      background-color: #235FF8;
+    }
+
+    #car-form {
+      height: 274px;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="header">
+    <nav class="container">
+      <div>
+        <a href="/">
+          <img src="https://github.com/BSSM-Parkinglot/.github/blob/main/Parklin.png?raw=true" class="logo">
+        </a>
+        <ul class="main-nav">
+          <!-- <li><a href="">{{user.username}}</a></li> -->
+          <li><a href="/">차량 조회</a></li>
+          <li><a href="/account">계좌 등록</a></li>
+        </ul>
+      </div>
+      <ul class="sub-nav">
+        <li><a href="/signup" class="signup-button">회원가입</a></li>
+        <li><a href="/login" class="login-button">로그인</a></li>
       </ul>
-    </header>
+    </nav>
+  </header>
 
-    <form id="login-form" class="login">
-      <h3>로그인</h3>
-      <input id="username" type="text" placeholder="이름" required />
-      <input id="password" type="password" placeholder="비밀번호" required />
-      <button type="submit">로그인</button>
-    </form>
-    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
-    <script src="/login.js"></script>
-  </body>
+  <form id="login-form" class="login">
+    <h3 class="form-title">로그인</h3>
+    <div class="input-section">
+      <input class="form-input" id="username" type="text" placeholder="이름" required />
+      <input class="form-input" id="password" type="password" placeholder="비밀번호" required />
+    </div>
+    <button type="submit" class="form-button">로그인</button>
+  </form>
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script src="/login.js"></script>
+</body>
+
 </html>
