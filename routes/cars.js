@@ -1,115 +1,123 @@
 const express = require("express");
-const { Op, Sequelize, } = require("sequelize"); // Op 객체를 가져옵니다.
+const { Op, Sequelize } = require("sequelize"); // Op 객체를 가져옵니다.
 const Car_Info = require("../models/car_info");
+const moment = require("moment-timezone");
 const router = express.Router();
 
-var cars;
-var val;
-var exit;
-var timeDifferenceInMinutes;
-var money;
+const dateFormat = "YYYY-MM-DD HH:mm:ss";
 
-router.get("/", async (req, res, next) => {
+router.get("/:carnum", async (req, res, next) => {
+  const carnum = req.params.carnum;
+  console.log("hello" + carnum);
+  const cars = await Car_Info.findAll({
+    where: {
+      CarNum: carnum,
+    },
+  });
   res.render("show", { cars });
 });
 
 router.post("/", async (req, res, next) => {
-  console.log(req.body.carnum);
-  console.log("console 실행중");
-  cars = await Car_Info.findAll({
+  const carnum = req.body.carnum;
+  const cars = await Car_Info.findAll({
     where: {
-      CarNum: req.body.carnum,
+      CarNum: carnum,
+      ExitTime: null,
     },
   });
+
   if (cars.length > 0) {
-    val = 1;
-    exit = await Car_Info.findAll({
-      where: {
-        ExitTime: {
-          [Op.not]: null,
+    let i = 0;
+    while (cars[i] != undefined) {
+      await Car_Info.update(
+        {
+          ExitTime: Sequelize.literal("NOW()"),
         },
-        CarNum: req.body.carnum,
+        {
+          where: {
+            CarNum: carnum,
+          },
+        }
+      );
+      const cars = await Car_Info.findAll({
+        where: {
+          CarNum: carnum,
+        },
+      });
+
+      const enter = moment(cars[i].EnterTime, dateFormat);
+      const exit = moment(cars[i].ExitTime, dateFormat)
+
+      const differenceInMinutes = exit.diff(enter, "minutes");
+
+      const money = (differenceInMinutes / 10) * 1000;
+
+      console.log("enter: " + cars[i].EnterTime);
+      console.log("exit: " + cars[i].ExitTime);
+      console.log("주차한 분: " + differenceInMinutes);
+      console.log("돈: " + money);
+
+      await Car_Info.update(
+        {
+          Time: differenceInMinutes,
+          Money: money,
+        },
+        {
+          where: {
+            id: cars[i].id,
+            CarNum: carnum,
+          },
+        }
+      );
+      i++;
+    }
+    await Car_Info.update(
+      {
+        ExitTime: null,
+      },
+      {
+        where: {
+          CarNum: carnum,
+        },
+      }
+    );
+    res.redirect(`car/${carnum}`);
+  } else {
+    const cars = await Car_Info.findAll({
+      where: {
+        CarNum: carnum,
       },
     });
-    if (exit.length > 0) {
-      const exitTime = new Date(cars[0].ExitTime);
-      const enterTime = new Date(cars[0].EnterTime);
+    let i = 0;
+    while (cars[i] != undefined) {
+      
+      const enter = moment(cars[i].EnterTime, dateFormat);
+      const exit = moment(cars[i].ExitTime, dateFormat)
 
-      const timeDifferenceInMillis = exitTime - enterTime;
+      const differenceInMinutes = exit.diff(enter, "minutes");
 
-      timeDifferenceInMinutes = timeDifferenceInMillis / (1000 * 60);
+      const money = (differenceInMinutes / 10) * 1000;
 
-      money = timeDifferenceInMinutes / 10 * 1000;
-
-      console.log("Time Difference (in minutes):", timeDifferenceInMinutes);
+      console.log("enter: " + cars[i].EnterTime);
+      console.log("exit: " + cars[i].ExitTime);
+      console.log("주차한 분: " + differenceInMinutes);
+      console.log("돈: " + money);
 
       await Car_Info.update(
         {
-          Time: timeDifferenceInMinutes,
+          Time: differenceInMinutes,
           Money: money,
         },
         {
           where: {
-            CarNum: req.body.carnum,
-          }
-
-        },
-      )
-    } else {
-      await Car_Info.update(
-        {
-          ExitTime: Sequelize.literal('NOW()'),
-        },
-        {
-          where: {
-            CarNum: req.body.carnum,
-          }
-
-        },
-      )
-      cars = await Car_Info.findAll({
-        where: {
-          CarNum: req.body.carnum,
-        },
-      });
-      const exitTime = new Date(cars[0].ExitTime);
-      const enterTime = new Date(cars[0].EnterTime);
-
-      const timeDifferenceInMillis = exitTime - enterTime;
-
-      timeDifferenceInMinutes = timeDifferenceInMillis / (1000 * 60);
-
-      money = timeDifferenceInMinutes / 10 * 1000;
-
-      console.log("Time Difference (in minutes):", timeDifferenceInMinutes);
-
-      await Car_Info.update(
-        {
-          Time: timeDifferenceInMinutes,
-          ExitTime: null,
-          Money: money,
-        },
-        {
-          where: {
-            CarNum: req.body.carnum,
-          }
-
-        },
-      )
-      cars = await Car_Info.findAll({
-        where: {
-          CarNum: req.body.carnum,
-        },
-      });
+            id: cars[i].id,
+            CarNum: carnum,
+          },
+        }
+      );
+      i++;
     }
-  } else {
-    val = 0;
-  }
-  try {
-    res.json(cars);
-  } catch (err) {
-    console.error(err);
-    next(err);
+    res.redirect(`car/${carnum}`);
   }
 });
 

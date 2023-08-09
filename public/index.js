@@ -3,7 +3,7 @@ document.getElementById("car-form").addEventListener("submit", async (e) => {
   const carnum = e.target.carnum.value;
   try {
     await axios.post("/car", { carnum });
-    location.href = "/car";
+    location.href = `/car/${carnum}`;
   } catch (err) {
     console.error(err);
   }
